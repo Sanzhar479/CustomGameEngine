@@ -3,15 +3,10 @@ CEngine* engine;
 
 int main(int argc, char* argv[])
 {
-	engine = new CEngine();
-	if (!engine->OnCreate("Game Engine", 800, 600))
+	if (!CEngine::GetInstance()->OnCreate("Game Engine", 800, 600))
 	{
-		delete engine;
-		engine = nullptr;
-		return 0;
+		std:: cout<< "Enine Failed to Initialize" << std::endl;
 	}
-	engine->Run();
-	delete engine;
-	engine = nullptr;
+	CEngine::GetInstance()->Run();
 	return 0;
 }

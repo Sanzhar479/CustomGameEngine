@@ -1,11 +1,22 @@
 #include "CEngine.h"
 
+std::unique_ptr<CEngine> CEngine::engineInstance = nullptr;
+
 CEngine::CEngine() :window(nullptr),isRunning(false)
 {
 }
 
 CEngine::~CEngine()
 {
+}
+
+CEngine* CEngine::GetInstance()
+{
+	if (engineInstance.get() == nullptr)
+	{
+		engineInstance.reset(new CEngine);
+	}
+	return engineInstance.get();
 }
 
 bool CEngine::OnCreate(std::string name_, int width_, int height_)
