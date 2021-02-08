@@ -1,5 +1,12 @@
-﻿  CEngine.cpp
+﻿  Debug.cpp
+  CEngine.cpp
+  GameInterface.cpp
+  Game1.cpp
+  GameScene.cpp
   Main.cpp
   Window.cpp
+  Timer.cpp
+D:\Projects\CustomEngine\CustomGameEngine\OpenGL Project\Engine\Core\Timer.cpp(29,33): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+  StartScene.cpp
   Generating Code...
-  OpenGL Project.vcxproj -> D:\Projects\OpenGL Project\OpenGL Project\Debug\OpenGL Project.exe
+  OpenGL Project.vcxproj -> D:\Projects\CustomEngine\CustomGameEngine\Debug\OpenGL Project.exe

@@ -7,7 +7,7 @@ int main(int argc, char* argv[])
 	CEngine::GetInstance()->SetGameInterface(new Game1);
 	if (!CEngine::GetInstance()->OnCreate("Game Engine", 800, 600))
 	{
-		std:: cout<< "Enine Failed to Initialize" << std::endl;
+		Debug::FatalError("Engine Failed to Initialize", "Main.cpp", __LINE__);
 	}
 	CEngine::GetInstance()->Run();
 	return 0;

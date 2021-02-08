@@ -1,0 +1,22 @@
+﻿  CEngine.cpp
+CEngine.obj : error LNK2019: unresolved external symbol SDL_GL_SwapWindow referenced in function "private: void __cdecl CEngine::Render(void)" (?Render@CEngine@@AEAAXXZ)
+CEngine.obj : error LNK2019: unresolved external symbol SDL_Delay referenced in function "public: void __cdecl CEngine::Run(void)" (?Run@CEngine@@QEAAXXZ)
+CEngine.obj : error LNK2019: unresolved external symbol SDL_Quit referenced in function "private: void __cdecl CEngine::OnDestroy(void)" (?OnDestroy@CEngine@@AEAAXXZ)
+Window.obj : error LNK2019: unresolved external symbol SDL_CreateWindow referenced in function "public: bool __cdecl Window::OnCreate(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,int,int)" (?OnCreate@Window@@QEAA_NV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HH@Z)
+Window.obj : error LNK2019: unresolved external symbol SDL_DestroyWindow referenced in function "public: void __cdecl Window::OnDestroy(void)" (?OnDestroy@Window@@QEAAXXZ)
+Window.obj : error LNK2019: unresolved external symbol SDL_GL_SetAttribute referenced in function "private: void __cdecl Window::SetPostAttributes(void)" (?SetPostAttributes@Window@@AEAAXXZ)
+Window.obj : error LNK2019: unresolved external symbol SDL_GL_CreateContext referenced in function "public: bool __cdecl Window::OnCreate(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,int,int)" (?OnCreate@Window@@QEAA_NV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HH@Z)
+Window.obj : error LNK2019: unresolved external symbol SDL_GL_SetSwapInterval referenced in function "private: void __cdecl Window::SetPreAttributes(void)" (?SetPreAttributes@Window@@AEAAXXZ)
+Window.obj : error LNK2019: unresolved external symbol SDL_GL_DeleteContext referenced in function "public: void __cdecl Window::OnDestroy(void)" (?OnDestroy@Window@@QEAAXXZ)
+Window.obj : error LNK2019: unresolved external symbol SDL_Init referenced in function "public: bool __cdecl Window::OnCreate(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,int,int)" (?OnCreate@Window@@QEAA_NV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HH@Z)
+Window.obj : error LNK2019: unresolved external symbol __imp_glewInit referenced in function "public: bool __cdecl Window::OnCreate(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,int,int)" (?OnCreate@Window@@QEAA_NV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HH@Z)
+Window.obj : error LNK2019: unresolved external symbol __imp_glewExperimental referenced in function "private: void __cdecl Window::SetPreAttributes(void)" (?SetPreAttributes@Window@@AEAAXXZ)
+Timer.obj : error LNK2019: unresolved external symbol SDL_GetTicks referenced in function "public: unsigned int __cdecl Timer::GetSleepTime(unsigned int)const " (?GetSleepTime@Timer@@QEBAII@Z)
+MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
+C:\GameDev\SDL\lib\SDL2.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\GameDev\SDL\lib\SDL2_image.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\GameDev\SDL\lib\SDL2main.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\GameDev\SDL\lib\SDL2test.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\GameDev\OpenGL\lib\glew32.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\GameDev\OpenGL\lib\glew32s.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+D:\Projects\CustomEngine\CustomGameEngine\x64\Debug\OpenGL Project.exe : fatal error LNK1120: 14 unresolved externals

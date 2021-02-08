@@ -25,13 +25,13 @@ bool CEngine::OnCreate(std::string name_, int width_, int height_)
 	window = new Window();
 	if (!window->OnCreate(name_,width_,height_))
 	{
-		std::cout << "Failed to initialize window" << std::endl;
+		Debug::FatalError("Failed to initialize window", "CEngine.cpp", __LINE__);
 		OnDestroy();
 		return isRunning=false;
 	}
 	if (gameInterface) {
 		if (!gameInterface->OnCreate()) {
-			std::cout << "Game failed to initialize" << std::endl;
+			Debug::FatalError("Game failed to initialize", "CEngine.cpp", __LINE__);
 			OnDestroy();
 			return isRunning = false;
 		}

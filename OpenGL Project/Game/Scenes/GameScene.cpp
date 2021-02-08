@@ -6,7 +6,7 @@ GameScene::~GameScene() {
 
 }
 bool GameScene::OnCreate() {
-	std::cout << "game scene" << std::endl;
+	Debug::Info("Game Scene", "GameScene.cpp", __LINE__);
 	return true;
 }
 void GameScene::Update(const float deltaTime_) {
