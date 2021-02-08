@@ -2,7 +2,7 @@
 
 std::unique_ptr<CEngine> CEngine::engineInstance = nullptr;
 
-CEngine::CEngine() :window(nullptr),isRunning(false)
+CEngine::CEngine() :window(nullptr),isRunning(false),fps(60), gameInterface(nullptr), currentSceneNum(0)
 {
 }
 
@@ -21,6 +21,7 @@ CEngine* CEngine::GetInstance()
 
 bool CEngine::OnCreate(std::string name_, int width_, int height_)
 {
+	Debug::OnCreate();
 	window = new Window();
 	if (!window->OnCreate(name_,width_,height_))
 	{
@@ -28,6 +29,15 @@ bool CEngine::OnCreate(std::string name_, int width_, int height_)
 		OnDestroy();
 		return isRunning=false;
 	}
+	if (gameInterface) {
+		if (!gameInterface->OnCreate()) {
+			std::cout << "Game failed to initialize" << std::endl;
+			OnDestroy();
+			return isRunning = false;
+		}
+	}
+	Debug::Info("Everything worked", "CEngine.cpp", __LINE__);
+	timer.Start();
 	return isRunning = true;
 }
 
@@ -35,8 +45,10 @@ void CEngine::Run()
 {
 	while (isRunning)
 	{
-		Update(0.016f);
+		timer.UpdateFrameTicks();
+		Update(timer.GetDeltaTime());
 		Render();
+		SDL_Delay(timer.GetSleepTime(fps));
 	}
 	//if (!isRunning) 
 	//{
@@ -44,26 +56,53 @@ void CEngine::Run()
 	//}
 }
 
+void CEngine::Exit()
+{
+	isRunning = false;
+}
+
 bool CEngine::GetIsRunning()
 {
 	return isRunning;
 }
 
+void CEngine::SetCurrentScene(int sceneNum_)
+{
+	currentSceneNum = sceneNum_;
+}
+
 void CEngine::OnDestroy()
 {
+	delete gameInterface;
+	gameInterface = nullptr;
 	delete window;
 	window = nullptr;
 	SDL_Quit();
 	exit(0);
 }
 
+int CEngine::GetCurrentScene() const {
+	return currentSceneNum;
+}
+
+void CEngine::SetGameInterface(GameInterface* gameInterface_) {
+	gameInterface = gameInterface_;
+}
 void CEngine::Render()
 {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+	if (gameInterface) 
+	{
+		gameInterface->Render();
+	}
 	SDL_GL_SwapWindow(window->GetWindow());
 }
 
 void CEngine::Update(const float deltaTime_)
 {
+	if (gameInterface) {
+		gameInterface->Update(deltaTime_);
+		std::cout << deltaTime_ << std::endl;
+	}
 }

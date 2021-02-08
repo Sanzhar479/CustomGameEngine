@@ -2,6 +2,10 @@
 #define CENGINE_H
 #include "Window.h"
 #include <memory>
+#include "Timer.h"
+#include "Debug.h"
+#include "GameInterface.h"
+#include "Scene.h"
 class CEngine
 {public:
 	CEngine(const CEngine&) = delete;
@@ -13,8 +17,11 @@ class CEngine
 
 	bool OnCreate(std::string name_, int width_, int height_);
 	void Run();
+	void Exit();
 	bool GetIsRunning();
-
+	int GetCurrentScene() const;
+	void SetCurrentScene(int sceneNum_);
+	void SetGameInterface(GameInterface* gameInterface_);
 private:
 	CEngine();
 	~CEngine();
@@ -27,6 +34,10 @@ private:
 
 	Window* window;
 	bool isRunning;
+	Timer timer;
+	unsigned int fps;
+	GameInterface* gameInterface;
+	int currentSceneNum;
 };
 
 #endif
