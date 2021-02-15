@@ -6,7 +6,6 @@ Game1::~Game1() {
 	delete currentScene;
 	currentScene = nullptr;
 }
-
 bool Game1::OnCreate() {
 	if (CEngine::GetInstance()->GetCurrentScene() == 0) {
 		currentScene = new StartScene();
@@ -16,17 +15,14 @@ bool Game1::OnCreate() {
 	Debug::FatalError("Engine's scene is not initialiized to 0", "Game1.cpp", __LINE__);
 	return false;
 }
-
 void Game1::Update(const float deltaTime_) {
 	if (currentSceneNum != CEngine::GetInstance()->GetCurrentScene())
 		BuildScene();
 	currentScene->Update(deltaTime_);
 }
-
 void Game1::Render() {
 	currentScene->Render();
 }
-
 void Game1::BuildScene() {
 	delete currentScene;
 	currentScene = nullptr;

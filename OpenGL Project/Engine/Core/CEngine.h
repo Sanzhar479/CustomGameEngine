@@ -6,7 +6,6 @@
 #include "Debug.h"
 #include "GameInterface.h"
 #include "Scene.h"
-#include "../Rendering/3D/GameObject.h"
 class CEngine
 {public:
 	CEngine(const CEngine&) = delete;
@@ -15,8 +14,7 @@ class CEngine
 	CEngine& operator=(CEngine&&) = delete;
 
 	static CEngine* GetInstance();
-	CEngine();
-	~CEngine();
+
 	bool OnCreate(std::string name_, int width_, int height_);
 	void Run();
 	void Exit();
@@ -25,7 +23,8 @@ class CEngine
 	void SetCurrentScene(int sceneNum_);
 	void SetGameInterface(GameInterface* gameInterface_);
 private:
-	
+	CEngine();
+	~CEngine();
 	void OnDestroy();
 	void Update(const float deltaTime_);
 	void Render();
