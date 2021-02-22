@@ -10,5 +10,7 @@ public:
 	void Update(const float deltaTime_) override;
 
 	void Render() override;
+private:
+	GameObject* shape[3];
 };
 #endif
