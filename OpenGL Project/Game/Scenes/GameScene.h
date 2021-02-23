@@ -6,11 +6,11 @@ class GameScene : public Scene
 public:
 	GameScene();
 	virtual ~GameScene();
+
 	bool OnCreate() override;
 	void Update(const float deltaTime_) override;
-
-	void Render() override;
+    void Render() override;
 private:
-	GameObject* shape[3];
+	GameObject* shape;
 };
 #endif
