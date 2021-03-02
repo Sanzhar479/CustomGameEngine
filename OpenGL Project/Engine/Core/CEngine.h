@@ -9,6 +9,7 @@
 #include "../Rendering/3D/GameObject.h"
 
 #include "../Graphics/ShaderHandler.h"
+#include "../Camera/Camera.h"
 class CEngine
 {public:
 	CEngine(const CEngine&) = delete;
@@ -22,10 +23,15 @@ class CEngine
 	bool OnCreate(std::string name_, int width_, int height_);
 	void Run();
 	void Exit();
-	bool GetIsRunning();
+	bool GetIsRunning() const;
 	int GetCurrentScene() const;
+	float GetScreenWidth() const;
+	float GetScreenHeight() const;
+	Camera* GetCamera() const;
+
 	void SetCurrentScene(int sceneNum_);
 	void SetGameInterface(GameInterface* gameInterface_);
+	void SetCamera(Camera* camera_);
 private:
 	
 	void OnDestroy();
@@ -41,6 +47,7 @@ private:
 	unsigned int fps;
 	GameInterface* gameInterface;
 	int currentSceneNum;
+	Camera* camera;
 };
 
 #endif

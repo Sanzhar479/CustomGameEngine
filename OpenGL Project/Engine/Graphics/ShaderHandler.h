@@ -7,6 +7,7 @@
 #include <memory>
 #include <glew.h>
 #include "../Core/Debug.h"
+
 class ShaderHandler
 {
 public:
@@ -31,6 +32,6 @@ private:
 
 	std::string ReadShader(const std::string& filePath_);
 	GLuint CreateShader(GLenum shaderType_, const std::string& source_, const std::string& shaderName_);
-	static std::unordered_map<std::string, GLuint> program;
+	static std::unordered_map<std::string, GLuint> programs;
 };
 #endif

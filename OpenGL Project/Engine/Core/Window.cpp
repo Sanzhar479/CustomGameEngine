@@ -48,6 +48,8 @@ bool Window::OnCreate(std::string name_, int width_, int height_)
 	}
 	glEnable(GL_DEPTH_TEST);
 	std::cout << "OpenGl version: " << glGetString(GL_VERSION) << std::endl;
+	
+	glViewport(0, 0, width, height);
 	return true;
 }
 

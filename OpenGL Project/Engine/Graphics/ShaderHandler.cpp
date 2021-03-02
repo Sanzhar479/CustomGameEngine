@@ -1,9 +1,14 @@
 #include "ShaderHandler.h"
 
+
+
 std::unique_ptr<ShaderHandler> ShaderHandler::shaderInstance = nullptr;
-std::unordered_map<std::string, GLuint> programs = std::unordered_map<std::string, GLuint>();
-ShaderHandler::ShaderHandler()
+std::unordered_map<std::string, GLuint>  ShaderHandler::programs = std::unordered_map<std::string, GLuint>();
+
+
+ShaderHandler::ShaderHandler ()
 {
+
 }
 
 ShaderHandler::~ShaderHandler()
@@ -62,7 +67,7 @@ void ShaderHandler::CreateProgram(const std::string& shaderName_, const std::str
 
 GLuint ShaderHandler::GetShader(const std::string& shaderName_)
 {
-	if (program.find(shaderName_) !=programs.end())
+	if (programs.find(shaderName_) !=programs.end())
 	{
 		return programs[shaderName_];
 	}

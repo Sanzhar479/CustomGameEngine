@@ -29,8 +29,8 @@ bool CEngine::OnCreate(std::string name_, int width_, int height_)
 		OnDestroy();
 		return isRunning=false;
 	}
-	ShaderHandler::GetInstance()->CreateProgram("colourShader", "Engine/Shaders/ColourVertexShader.glsl",
-		"Engine/Shaders/ColourFragmentShader.glsl");
+	ShaderHandler::GetInstance()->CreateProgram("colourShader", "./Shaders/ColourVertexShader.glsl",
+		"./Shaders/ColourFragmentShader.glsl");
 	if (gameInterface) {
 		if (!gameInterface->OnCreate()) {
 			Debug::FatalError("Game failed to initialize", "CEngine.cpp", __LINE__);
@@ -63,7 +63,7 @@ void CEngine::Exit()
 	isRunning = false;
 }
 
-bool CEngine::GetIsRunning()
+bool CEngine::GetIsRunning() const
 {
 	return isRunning;
 }
@@ -79,13 +79,32 @@ int CEngine::GetCurrentScene() const {
 	return currentSceneNum;
 }
 
+float CEngine::GetScreenWidth() const
+{
+	return static_cast<float>(window->GetWidth());
+}
+
+float CEngine::GetScreenHeight() const
+{
+	return static_cast<float>(window->GetHeight());
+}
+
+Camera* CEngine::GetCamera() const
+{
+	return camera;
+}
+
 void CEngine::SetGameInterface(GameInterface* gameInterface_) {
 	gameInterface = gameInterface_;
+}
+void CEngine::SetCamera(Camera* camera_)
+{
+	camera = camera_;
 }
 void CEngine::Render()
 {
 	glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	if (gameInterface) 
 	{
 		gameInterface->Render();
@@ -108,7 +127,8 @@ void CEngine::OnDestroy()
 	delete gameInterface;
 	gameInterface = nullptr;
 
-
+	delete camera;
+	camera = nullptr;
 
 	delete window;
 	window = nullptr;
