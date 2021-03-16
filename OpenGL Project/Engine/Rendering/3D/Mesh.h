@@ -15,7 +15,7 @@ struct Vertex {
 class Mesh
 {
 public:
-	Mesh(std::vector<Vertex>& vertexList_,GLuint shaderProgram_);
+	Mesh(std::vector<Vertex>& vertexList_, GLuint textureID_,GLuint shaderProgram_);
 	~Mesh();
 	void Render(Camera* camera_,glm::mat4 transform_);
 private:
@@ -23,6 +23,7 @@ private:
 	GLuint VAO, VBO;
 	std::vector<Vertex> vertexList;
 	GLuint shaderProgram;
-	GLuint modelLoc, viewLoc, projectionLoc;
+	GLuint textureID;
+	GLuint modelLoc, viewLoc, projectionLoc,textureLoc;
 };
 #endif

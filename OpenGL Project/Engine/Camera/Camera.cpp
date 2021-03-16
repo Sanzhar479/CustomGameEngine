@@ -32,7 +32,7 @@ Camera::~Camera()
 
 void Camera::SetPosition(glm::vec3 position_)
 {
-    position = position;
+    position = position_;
     UpdateCameraVector();
 }
 
@@ -55,7 +55,7 @@ glm::mat4 Camera::GetPerspective() const
 
 glm::mat4 Camera::GetOrthographic() const
 {
-    return orthographic;;
+    return orthographic;
 }
 
 glm::vec3 Camera::GetPosition()

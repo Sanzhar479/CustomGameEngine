@@ -29,8 +29,12 @@ bool CEngine::OnCreate(std::string name_, int width_, int height_)
 		OnDestroy();
 		return isRunning=false;
 	}
-	ShaderHandler::GetInstance()->CreateProgram("colourShader", "./Shaders/ColourVertexShader.glsl",
+	ShaderHandler::GetInstance()->CreateProgram("colourShader", 
+		"./Shaders/ColourVertexShader.glsl",
 		"./Shaders/ColourFragmentShader.glsl");
+	ShaderHandler::GetInstance()->CreateProgram("defaultShader",
+		"./Shaders/FragmentShader.glsl",
+		"./Shaders/VertexShader.glsl");
 	if (gameInterface) {
 		if (!gameInterface->OnCreate()) {
 			Debug::FatalError("Game failed to initialize", "CEngine.cpp", __LINE__);
@@ -123,6 +127,7 @@ void CEngine::Update(const float deltaTime_)
 void CEngine::OnDestroy()
 {
 	ShaderHandler::GetInstance()->OnDestroy();
+	TextureHandler::GetInstance()->OnDestroy();
 
 	delete gameInterface;
 	gameInterface = nullptr;
@@ -133,6 +138,7 @@ void CEngine::OnDestroy()
 	delete window;
 	window = nullptr;
 
+	
 	SDL_Quit();
 	exit(0);
 }
