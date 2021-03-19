@@ -65,6 +65,12 @@ void TextureHandler::CreateTexture(const std::string& textureName_, const std::s
 
 	t->width = static_cast<float>(surface->w);
 	t->height = static_cast<float>(surface->h);
+	t->textureName = textureName_;
+
+	textures.push_back(t);
+
+	SDL_FreeSurface(surface);
+	surface = nullptr;
 }
 
 const GLuint TextureHandler::GetTexture(const std::string& textureName_)

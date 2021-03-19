@@ -61,4 +61,10 @@ void Mesh::GenerateBuffers() {
 	viewLoc = glGetUniformLocation(shaderProgram, "view");
 	projectionLoc = glGetUniformLocation(shaderProgram, "projection");
 	textureLoc = glGetUniformLocation(shaderProgram, "inputTexture");
+	position = glGetUniformLocation(shaderProgram, "viewPosition");
+	lightPos = glGetUniformLocation(shaderProgram, "position");
+	lightAmb = glGetUniformLocation(shaderProgram, "ambience");
+	lightDiff = glGetUniformLocation(shaderProgram, "diff");
+	lightSpec = glGetUniformLocation(shaderProgram, "spec");
+	lightColour = glGetUniformLocation(shaderProgram, "lightColour");
 }

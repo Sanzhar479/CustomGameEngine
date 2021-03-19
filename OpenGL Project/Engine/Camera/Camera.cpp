@@ -15,6 +15,7 @@ Camera::Camera() : position(glm::vec3()), fieldOfView(0.0f), forward(glm::vec3()
     yaw = -90.0f;
     pitch = 0.0f;
 
+    
     perspective = glm::perspective(fieldOfView,
         CEngine::GetInstance()->GetScreenWidth() /
         CEngine::GetInstance()->GetScreenHeight(),
@@ -28,6 +29,15 @@ Camera::Camera() : position(glm::vec3()), fieldOfView(0.0f), forward(glm::vec3()
 
 Camera::~Camera()
 {
+    if (lightSources.size() > 0)
+    {
+        for (auto l : lightSources)
+        {
+            delete l;
+            l = nullptr;
+        }
+        lightSources.clear();
+    }
 }
 
 void Camera::SetPosition(glm::vec3 position_)
@@ -41,6 +51,18 @@ void Camera::SetRotation(float yaw_, float pitch_)
     yaw = yaw;
     pitch = pitch;
     UpdateCameraVector();
+}
+
+void Camera::AddLightSource(LightSource* lightSource_)
+{
+    lightSources.push_back(lightSource_);
+}
+
+
+
+void Camera::GetLightList(LightSource* lightSource_)
+{
+    lightSources.size();
 }
 
 glm::mat4 Camera::GetView() const

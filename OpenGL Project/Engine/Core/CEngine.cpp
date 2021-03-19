@@ -33,8 +33,8 @@ bool CEngine::OnCreate(std::string name_, int width_, int height_)
 		"./Shaders/ColourVertexShader.glsl",
 		"./Shaders/ColourFragmentShader.glsl");
 	ShaderHandler::GetInstance()->CreateProgram("defaultShader",
-		"./Shaders/FragmentShader.glsl",
-		"./Shaders/VertexShader.glsl");
+		"./Shaders/VertexShader.glsl",
+		"./Shaders/FragmentShader.glsl");
 	if (gameInterface) {
 		if (!gameInterface->OnCreate()) {
 			Debug::FatalError("Game failed to initialize", "CEngine.cpp", __LINE__);

@@ -4,7 +4,6 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
 #include "../../Camera/Camera.h"
 struct Vertex {
 	glm::vec3 position;
@@ -25,5 +24,6 @@ private:
 	GLuint shaderProgram;
 	GLuint textureID;
 	GLuint modelLoc, viewLoc, projectionLoc,textureLoc;
+	GLuint position, lightPos, lightAmb, lightDiff, lightSpec, lightColour;
 };
 #endif
