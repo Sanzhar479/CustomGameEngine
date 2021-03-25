@@ -1,6 +1,6 @@
 #include "LightSource.h"
 
-LightSource::LightSource(glm::vec3 position_ = (glm::vec3()), float ambience_, float diff_ ,float spec_, glm::vec3 colour_ =(glm::vec3()))
+LightSource::LightSource(glm::vec3 position_, float ambience_, float diff_ ,float spec_, glm::vec3 colour_ )
 	:position(glm::vec3()), lightColour(glm::vec3()), ambience(1.0f), diff(0.0f), spec(0.0f)
 {
 	position = position_;

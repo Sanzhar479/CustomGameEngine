@@ -58,12 +58,11 @@ void Camera::AddLightSource(LightSource* lightSource_)
     lightSources.push_back(lightSource_);
 }
 
-
-
-void Camera::GetLightList(LightSource* lightSource_)
+std::vector<LightSource*> Camera::GetLightList()
 {
-    lightSources.size();
+    return lightSources;
 }
+
 
 glm::mat4 Camera::GetView() const
 {

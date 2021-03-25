@@ -23,8 +23,14 @@ void Mesh::Render(Camera* camera_, glm::mat4 transform_)
 	
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(camera_->GetView()));
 	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(camera_->GetPerspective()));
-	
-	glBindVertexArray(VAO);
+	/*glUniform3f(position,camera_->GetPosition().x, camera_->GetPosition().y, camera_->GetPosition().z);*/
+	glUniform3fv(position,1,glm::value_ptr(camera_->GetPosition()));
+	glUniform3fv(lightPos,1,glm::value_ptr(camera_->GetView()));
+	glUniform3fv(lightColour, 1, glm::value_ptr(camera_->GetView()));
+	glUniform1fv(lightAmb, 1, glm::value_ptr(camera_->GetView()));
+	glUniform1fv(lightDiff, 1, glm::value_ptr(camera_->GetView()));
+	glUniform1fv(lightSpec, 1, glm::value_ptr(camera_->GetView()));
+  	glBindVertexArray(VAO);;
 	glEnable(GL_DEPTH_TEST);
    
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(transform_));
@@ -61,10 +67,10 @@ void Mesh::GenerateBuffers() {
 	viewLoc = glGetUniformLocation(shaderProgram, "view");
 	projectionLoc = glGetUniformLocation(shaderProgram, "projection");
 	textureLoc = glGetUniformLocation(shaderProgram, "inputTexture");
-	position = glGetUniformLocation(shaderProgram, "viewPosition");
-	lightPos = glGetUniformLocation(shaderProgram, "position");
-	lightAmb = glGetUniformLocation(shaderProgram, "ambience");
-	lightDiff = glGetUniformLocation(shaderProgram, "diff");
-	lightSpec = glGetUniformLocation(shaderProgram, "spec");
-	lightColour = glGetUniformLocation(shaderProgram, "lightColour");
+	position = glGetUniformLocation(shaderProgram, "camPos");
+	lightPos = glGetUniformLocation(shaderProgram, "light.position");
+	lightAmb = glGetUniformLocation(shaderProgram, "light.ambience");
+	lightDiff = glGetUniformLocation(shaderProgram, "light.diff");
+	lightSpec = glGetUniformLocation(shaderProgram, "light.spec");
+	lightColour = glGetUniformLocation(shaderProgram, "light.lightColour");
 }

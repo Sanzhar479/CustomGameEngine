@@ -14,7 +14,7 @@ class Camera
 
 	void SetRotation(float yaw_, float pitch_);
 	void AddLightSource(LightSource* lightSource_);
-	void GetLightList(LightSource* lightSource_);
+	std::vector<LightSource*> GetLightList();
 
 	glm::mat4 GetView() const;
 	glm::mat4 GetPerspective() const;
