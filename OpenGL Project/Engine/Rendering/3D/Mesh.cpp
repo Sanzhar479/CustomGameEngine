@@ -25,11 +25,12 @@ void Mesh::Render(Camera* camera_, glm::mat4 transform_)
 	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(camera_->GetPerspective()));
 	/*glUniform3f(position,camera_->GetPosition().x, camera_->GetPosition().y, camera_->GetPosition().z);*/
 	glUniform3fv(position,1,glm::value_ptr(camera_->GetPosition()));
-	glUniform3fv(lightPos,1,glm::value_ptr(camera_->GetView()));
-	glUniform3fv(lightColour, 1, glm::value_ptr(camera_->GetView()));
-	glUniform1fv(lightAmb, 1, glm::value_ptr(camera_->GetView()));
-	glUniform1fv(lightDiff, 1, glm::value_ptr(camera_->GetView()));
-	glUniform1fv(lightSpec, 1, glm::value_ptr(camera_->GetView()));
+	glUniform3fv(lightPos,1,glm::value_ptr(camera_->GetLightList()[0]->GetPosition()));
+	glUniform3fv(lightColour, 1, glm::value_ptr(camera_->GetLightList()[0]->GetColour()));
+	glUniform1f(lightAmb, ((camera_->GetLightList()[0]->GetAmbience())));
+	glUniform1f(lightDiff,(camera_->GetLightList()[0]->GetDiff()));
+	glUniform1f(lightSpec,(camera_->GetLightList()[0]->GetSpec()));
+
   	glBindVertexArray(VAO);;
 	glEnable(GL_DEPTH_TEST);
    
