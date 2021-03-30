@@ -17,12 +17,12 @@ bool GameScene::OnCreate() {
 	CEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(0.0f, 0.0f, 2.0f), 0.1f, 0.5f, 0.5f,
 		glm::vec3(0.6f, 0.4f, 0.0f)));
 
-	TextureHandler::GetInstance()->CreateTexture("CheckerboardTexture", "./Assets/Textures/CheckerboardTexture.png");
-	
-	Vertex v;
-	std::vector<Vertex> vertexList;
-	vertexList.reserve(36);
-	{v.position = glm::vec3(-0.5f, -0.5f, -0.5f);
+	/*TextureHandler::GetInstance()->CreateTexture("CheckerboardTexture", "./Assets/Textures/CheckerboardTexture.png");
+	*/
+	//Vertex v;
+	//std::vector<Vertex> vertexList;
+	//vertexList.reserve(36);
+	/*{v.position = glm::vec3(-0.5f, -0.5f, -0.5f);
 	v.normal = glm::vec3(0.0f, 0.0f, -1.0f);
 	v.textureCoordinates = glm::vec2(0.0f, 0.0f);
 	v.colour = glm::vec3(0.583f, 0.771f, 0.014f);
@@ -236,24 +236,23 @@ bool GameScene::OnCreate() {
 	v.normal = glm::vec3(0.0f, 1.0f, 0.0f);
 	v.textureCoordinates = glm::vec2(0.0f, 0.0f);
 	v.colour = glm::vec3(0.982f, 0.099f, 0.879f);
-	vertexList.push_back(v); }
-	
+	vertexList.push_back(v); }*/
+	//model = new Model(ShaderHandler::GetInstance()->GetShader("defaultShader"));
+	//model->AddMesh(new Mesh(vertexList,TextureHandler::GetInstance()->GetTexture("CheckerboardTexture")
+	//	,ShaderHandler::GetInstance()->GetShader("defaultShader")));
+	////model->SetScale(glm::vec3(0.5f));
+    model = new Model("./Assets/Models/Dice.obj", "./Assets/Materials/Dice.mtl",
+	ShaderHandler::GetInstance()->GetShader("basicShader"));
 
-	
-	model = new Model(ShaderHandler::GetInstance()->GetShader("defaultShader"));
-	model->AddMesh(new Mesh(vertexList,TextureHandler::GetInstance()->GetTexture("CheckerboardTexture")
-		,ShaderHandler::GetInstance()->GetShader("defaultShader")));
-	//model->SetScale(glm::vec3(0.5f));
-	model->SetAngle(0.1f);
 	shape = new GameObject(model);
 	
 	return true;
 }
 void GameScene::Update(const float deltaTime_) 
 {
-	model->SetAngle(model->GetAngle() + 0.005f);
+	shape->Update(deltaTime_);
 }
 void GameScene::Render() {
 	
-		shape->Render(CEngine::GetInstance()->GetCamera());
+	shape->Render(CEngine::GetInstance()->GetCamera());
 }

@@ -15,6 +15,7 @@ CEngine* CEngine::GetInstance()
 	if (engineInstance.get() == nullptr)
 	{
 		engineInstance.reset(new CEngine);
+		Debug::Info("Engine Instance was reseted", "CoreEngine.cpp", __LINE__);
 	}
 	return engineInstance.get();
 }

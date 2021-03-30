@@ -6,8 +6,8 @@
 #include "Debug.h"
 #include "GameInterface.h"
 #include "Scene.h"
-#include "../Rendering/3D/GameObject.h"
 
+#include "../Rendering/3D/GameObject.h"
 #include "../Graphics/ShaderHandler.h"
 #include "../Graphics/TextureHandler.h"
 #include "../Camera/Camera.h"
