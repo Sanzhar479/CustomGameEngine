@@ -5,16 +5,16 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "../../Camera/Camera.h"
+#include"../../Graphics/MaterialHandler.h"
 struct Vertex {
 	glm::vec3 position;
 	glm::vec3 normal;
 	glm::vec2 textureCoordinates;
-	glm::vec3 colour;
 };
 struct SubMesh {
 	std::vector<Vertex> vertexList;
 	std::vector<unsigned int> meshIndices;
-	GLuint textureID;
+	Material material;
 };
 class Mesh
 {

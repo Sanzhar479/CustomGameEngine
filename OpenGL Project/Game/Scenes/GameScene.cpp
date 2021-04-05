@@ -1,13 +1,11 @@
 #include "GameScene.h"
-GameScene::GameScene(): shape(nullptr)
+GameScene::GameScene()
 {
 
 }
 GameScene::~GameScene() {
 	
-	delete shape;
-	shape = nullptr;
-	model = nullptr;
+	
 }
 bool GameScene::OnCreate() {
 	Debug::Info("We switched to the game scene", "GameScene.cpp", __LINE__);
@@ -17,6 +15,16 @@ bool GameScene::OnCreate() {
 	CEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(0.0f, 0.0f, 2.0f), 0.1f, 0.5f, 0.5f,
 		glm::vec3(0.6f, 0.4f, 0.0f)));
 
+	Model* diceModel = new Model("../Assets/Models/Dice.obj", "../Assets/Materials/Dice.mtl");
+	ShaderHandler::GetInstance()->GetShader("basicShader");
+	Model* appleModel = new Model("../Assets/Models/Apple.obj", "../Assets/Materials/Apple.mtl");
+	ShaderHandler::GetInstance()->GetShader("basicShader");
+	SceneGraph::GetInstance()->AddModel(diceModel);
+	SceneGraph::GetInstance()->AddModel(appleModel);
+
+
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-2.0f, 0.0f, -2.0f)));
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(2.0f, 0.0f, 0.0f)), "Apple");
 	/*TextureHandler::GetInstance()->CreateTexture("CheckerboardTexture", "./Assets/Textures/CheckerboardTexture.png");
 	*/
 	//Vertex v;
@@ -241,18 +249,16 @@ bool GameScene::OnCreate() {
 	//model->AddMesh(new Mesh(vertexList,TextureHandler::GetInstance()->GetTexture("CheckerboardTexture")
 	//	,ShaderHandler::GetInstance()->GetShader("defaultShader")));
 	////model->SetScale(glm::vec3(0.5f));
-    model = new Model("./Assets/Models/Dice.obj", "./Assets/Materials/Dice.mtl",
-	ShaderHandler::GetInstance()->GetShader("basicShader"));
-
-	shape = new GameObject(model);
+diceModel = nullptr;
+appleModel = nullptr;
 	
 	return true;
 }
 void GameScene::Update(const float deltaTime_) 
 {
-	shape->Update(deltaTime_);
+	SceneGraph::GetInstance()->Update(deltaTime_);
 }
 void GameScene::Render() {
 	
-	shape->Render(CEngine::GetInstance()->GetCamera());
+	SceneGraph::GetInstance()->Render(CEngine::GetInstance()->GetCamera());
 }

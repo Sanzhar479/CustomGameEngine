@@ -3,7 +3,7 @@
 LoadObjModel::LoadObjModel() : vertices(std::vector<glm::vec3>()), normals(std::vector<glm::vec3>()),
 textureCoords(std::vector<glm::vec2>()), indices(std::vector<unsigned int>()),
 normalIndices(std::vector<unsigned int>()), textureIndices(std::vector<unsigned int>()),
-meshVertices(std::vector<Vertex>()), subMeshes(std::vector<SubMesh>()), currentTexture(0) {
+meshVertices(std::vector<Vertex>()), subMeshes(std::vector<SubMesh>()), currentMaterial(Material()) {
 	vertices.reserve(200);
 	normals.reserve(200);
 	textureCoords.reserve(200);
@@ -40,12 +40,37 @@ void LoadObjModel::LoadModel(const std::string& filePath_) {
 
 	std::string line;
 	while (std::getline(in, line)) {
+		//vertex data
 		if (line.substr(0, 2) == "v ") {
 			std::stringstream v(line.substr(2));
 			float x, y, z;
 			v >> x >> y >> z;
 			vertices.push_back(glm::vec3(x, y, z));
 		}
+		else if (line.substr(0, 2) == "vn") {
+			std::stringstream vn(line.substr(2));
+			float x, y, z;
+			vn >> x >> y >> z;
+			normals.push_back(glm::vec3(x, y, z));
+		}
+		else if (line.substr(0, 2) == "vt") {
+			std::stringstream vt(line.substr(2));
+			float x, y;
+			vt >> x >> y;
+			textureCoords.push_back(glm::vec2(x, y));
+		}
+		else if (line.substr(0, 2) == "f ") {
+			std::stringstream f(line.substr(2));
+			unsigned int f1[3], f2[3], f3[3];
+			char u;
+			f >> f1[0] >> u >> f2[0] >> u >> f3[0] >> f1[1] >> u >> f2[1] >> u >> f3[1] >> f1[2] >> u >> f2[2] >> u >> f3[2];
+			for (int i = 0; i < 3; i++) {
+				indices.push_back(f1[i]);
+				textureIndices.push_back(f2[i]);
+				normalIndices.push_back(f3[i]);
+			}
+		}
+		//new mesh
 		else if (line.substr(0, 7) == "usemtl ") {
 			if (indices.size() > 0)
 				PostProcessing();
@@ -54,6 +79,7 @@ void LoadObjModel::LoadModel(const std::string& filePath_) {
 	}
 	PostProcessing();
 }
+
 void LoadObjModel::PostProcessing() {
 	for (unsigned int i = 0; i < indices.size(); i++) {
 		Vertex vert;
@@ -66,20 +92,16 @@ void LoadObjModel::PostProcessing() {
 	SubMesh mesh;
 	mesh.vertexList = meshVertices;
 	mesh.meshIndices = indices;
-	mesh.textureID = currentTexture;
+	mesh.material = currentMaterial;
 	subMeshes.push_back(mesh);
 	indices.clear();
 	normalIndices.clear();
 	textureIndices.clear();
 	meshVertices.clear();
-	currentTexture = 0;
+	currentMaterial = Material();
 }
 void LoadObjModel::LoadMaterial(const std::string& matName_) {
-	currentTexture = TextureHandler::GetInstance()->GetTexture(matName_);
-	if (currentTexture == 0) {
-		TextureHandler::GetInstance()->CreateTexture(matName_, "Resources/Textures/" + matName_ + ".png");
-		currentTexture = TextureHandler::GetInstance()->GetTexture(matName_);
-	}
+	currentMaterial = MaterialHandler::GetInstance()->GetMaterial(matName_);
 }
 void LoadObjModel::LoadMaterialLibrary(const std::string& matFilePath_) {
 	std::ifstream in(matFilePath_.c_str(), std::ios::in);
