@@ -29,7 +29,8 @@ private:
 	SubMesh subMesh;
 	GLuint shaderProgram;
 	GLuint textureID;
-	GLuint modelLoc, viewLoc, projectionLoc,textureLoc;
+	GLuint modelLoc, viewLoc, projectionLoc;
 	GLuint position, lightPos, lightAmb, lightDiff, lightSpec, lightColour;
+	GLuint diffuseMap, shininess, transparency, ambient, diffuse, specular;
 };
 #endif

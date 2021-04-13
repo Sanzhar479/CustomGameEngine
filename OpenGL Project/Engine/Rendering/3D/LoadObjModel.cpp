@@ -84,9 +84,9 @@ void LoadObjModel::PostProcessing() {
 	for (unsigned int i = 0; i < indices.size(); i++) {
 		Vertex vert;
 
-		vert.position = vertices[indices[i]];
-		vert.normal = normals[normalIndices[i]];
-		vert.textureCoordinates = textureCoords[textureIndices[i]];
+		vert.position = vertices[indices[i]-1];
+		vert.normal = normals[normalIndices[i]-1];
+		vert.textureCoordinates = textureCoords[textureIndices[i]-1];
 		meshVertices.push_back(vert);
 	}
 	SubMesh mesh;
@@ -94,17 +94,23 @@ void LoadObjModel::PostProcessing() {
 	mesh.meshIndices = indices;
 	mesh.material = currentMaterial;
 	subMeshes.push_back(mesh);
+
 	indices.clear();
 	normalIndices.clear();
 	textureIndices.clear();
 	meshVertices.clear();
+
 	currentMaterial = Material();
 }
 void LoadObjModel::LoadMaterial(const std::string& matName_) {
 	currentMaterial = MaterialHandler::GetInstance()->GetMaterial(matName_);
 }
 void LoadObjModel::LoadMaterialLibrary(const std::string& matFilePath_) {
-	std::ifstream in(matFilePath_.c_str(), std::ios::in);
+	
+	MaterialLoader::LoadMaterial(matFilePath_);
+	
+	
+	/*std::ifstream in(matFilePath_.c_str(), std::ios::in);
 	if (!in) {
 		Debug::Error("Cannot open MTL file: " + matFilePath_, "LoadOBJModel.cpp", __LINE__);
 	}
@@ -113,5 +119,5 @@ void LoadObjModel::LoadMaterialLibrary(const std::string& matFilePath_) {
 		if (line.substr(0, 7) == "newmtl") {
 			LoadMaterial(line.substr(7));
 		}
-	}
+	}*/
 }

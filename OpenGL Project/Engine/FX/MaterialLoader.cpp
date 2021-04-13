@@ -26,6 +26,7 @@ void MaterialLoader::LoadMaterial(std::string filePath_){
 	}
 
 	if (m.diffuseMap != 0) { MaterialHandler::GetInstance()->AddMaterial(m); }
+	in.close();
 }
 
 GLuint MaterialLoader::Loadtexture(std::string fileName_){

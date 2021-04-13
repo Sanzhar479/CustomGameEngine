@@ -15,10 +15,10 @@ bool GameScene::OnCreate() {
 	CEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(0.0f, 0.0f, 2.0f), 0.1f, 0.5f, 0.5f,
 		glm::vec3(0.6f, 0.4f, 0.0f)));
 
-	Model* diceModel = new Model("../Assets/Models/Dice.obj", "../Assets/Materials/Dice.mtl");
-	ShaderHandler::GetInstance()->GetShader("basicShader");
-	Model* appleModel = new Model("../Assets/Models/Apple.obj", "../Assets/Materials/Apple.mtl");
-	ShaderHandler::GetInstance()->GetShader("basicShader");
+	Model* diceModel = new Model("./Assets/Models/Dice.obj", "./Assets/Materials/Dice.mtl",
+	ShaderHandler::GetInstance()->GetShader("defaultShader"));
+	Model* appleModel = new Model("./Assets/Models/Apple.obj", "./Assets/Materials/Apple.mtl",
+	ShaderHandler::GetInstance()->GetShader("defaultShader"));
 	SceneGraph::GetInstance()->AddModel(diceModel);
 	SceneGraph::GetInstance()->AddModel(appleModel);
 

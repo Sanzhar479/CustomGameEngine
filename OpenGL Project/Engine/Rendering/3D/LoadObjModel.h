@@ -8,6 +8,7 @@ class LoadObjModel
 public:
 	LoadObjModel();
 	~LoadObjModel();
+
 	void LoadModel(const std::string& objFilePath_,
 		const std::string& mtlFilePath_);
 	std::vector<SubMesh> GetSubMeshes();
