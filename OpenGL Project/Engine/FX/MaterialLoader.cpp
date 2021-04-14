@@ -3,7 +3,7 @@
 MaterialLoader::~MaterialLoader()
 {
 }
-void MaterialLoader::LoadMaterial(std::string filePath_){
+void MaterialLoader::LoadMaterial(std::string filePath_) {
 	std::ifstream in(filePath_.c_str(), std::ios::in);
 	if (!in) {
 		Debug::Error("Cannot open MTL file: " + filePath_, "MaterialLoader.cpp", __LINE__);
@@ -22,11 +22,40 @@ void MaterialLoader::LoadMaterial(std::string filePath_){
 			m.diffuseMap = Loadtexture(matName);
 			m.name = matName;
 		}
-	
-	}
+		else if (line.substr(0, 3) == "Ni ") {
+			std::stringstream ni(line.substr(3));
+			float i;
+			ni >> i;
+			m.shininess = i;
+		}
+		else if (line.substr(0, 2) == "d ") {
+			std::stringstream ni(line.substr(2));
+			float i;
+			ni >> i;
+			m.transparency = i;
+		}
+		else if (line.substr(0, 3) == "Ke ") {
+			std::stringstream ni(line.substr(3));
+			float x, y, z;
+			ni >> x >> y >> z;
+			m.ambient = glm::vec3(x, y, z);
+		}
+		else if (line.substr(0, 3) == "Kd ") {
+			std::stringstream ni(line.substr(3));
+			float x, y, z;
+			ni >> x >> y >> z;
+			m.diffuse = glm::vec3(x, y, z);
+		}
+		else if (line.substr(0, 3) == "Ks ") {
+			std::stringstream ni(line.substr(3));
+			float x, y, z;
+			ni >> x >> y >> z;
+			m.specular = glm::vec3(x, y, z);
+		}
 
-	if (m.diffuseMap != 0) { MaterialHandler::GetInstance()->AddMaterial(m); }
-	in.close();
+		if (m.diffuseMap != 0) { MaterialHandler::GetInstance()->AddMaterial(m); }
+		in.close();
+	}
 }
 
 GLuint MaterialLoader::Loadtexture(std::string fileName_){
