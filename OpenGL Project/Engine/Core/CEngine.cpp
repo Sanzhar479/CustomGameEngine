@@ -30,6 +30,13 @@ bool CEngine::OnCreate(std::string name_, int width_, int height_)
 		OnDestroy();
 		return isRunning=false;
 	}
+
+	SDL_WarpMouseInWindow(window->GetWindow(),
+		window->GetWidth() / 2,
+		window->GetHeight() / 2);
+
+	MouseEventListener::RegisterEngineObject(this);
+
 	ShaderHandler::GetInstance()->CreateProgram("colourShader", 
 		"./Shaders/ColourVertexShader.glsl",
 		"./Shaders/ColourFragmentShader.glsl");
@@ -53,6 +60,7 @@ void CEngine::Run()
 	while (isRunning)
 	{
 		timer.UpdateFrameTicks();
+		EventListener::Update();
 		Update(timer.GetDeltaTime());
 		Render();
 		SDL_Delay(timer.GetSleepTime(fps));
@@ -108,7 +116,7 @@ void CEngine::SetCamera(Camera* camera_)
 }
 void CEngine::Render()
 {
-	glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
+	glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	if (gameInterface) 
 	{
@@ -143,4 +151,21 @@ void CEngine::OnDestroy()
 	
 	SDL_Quit();
 	exit(0);
+}
+
+void CEngine::NotifyOfMousePressed(glm::ivec2 mouse_, int buttonType_) {
+
+}
+void CEngine::NotifyOfMouseReleased(glm::ivec2 mouse_, int buttonType_) {
+
+}
+void CEngine::NotifyOfMouseMove(glm::ivec2 mouse_) {
+	if (camera) {
+		camera->ProcessMouseMovement(MouseEventListener::GetMouseOffset());
+	}
+}
+void CEngine::NotifyOfMouseScroll(int y_) {
+	if (camera) {
+		camera->ProcessMouseZoom(y_);
+	}
 }

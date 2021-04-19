@@ -9,10 +9,12 @@
 class SceneGraph
 {  
 public:
+	//only one instance:
 	SceneGraph(const SceneGraph&) = delete;
 	SceneGraph(SceneGraph&&) = delete;
 	SceneGraph& operator=(const SceneGraph&) = delete;
 	SceneGraph& operator =(SceneGraph&&) = delete;
+	//
 
 	static SceneGraph* GetInstance();
 	void OnDestroy();

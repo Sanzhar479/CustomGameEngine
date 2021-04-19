@@ -12,6 +12,7 @@
 #include "../Graphics/ShaderHandler.h"
 #include "../Graphics/TextureHandler.h"
 #include "../Graphics/MaterialHandler.h"
+#include "../Events/EventListener.h"
 #include "../Camera/Camera.h"
 class CEngine
 {public:
@@ -35,6 +36,12 @@ class CEngine
 	void SetCurrentScene(int sceneNum_);
 	void SetGameInterface(GameInterface* gameInterface_);
 	void SetCamera(Camera* camera_);
+
+	void NotifyOfMousePressed(glm::ivec2 mouse_, int buttonType_);
+	void NotifyOfMouseReleased(glm::ivec2 mouse_, int buttonType_);
+	void NotifyOfMouseMove(glm::ivec2 mouse_);
+	void NotifyOfMouseScroll(int y_);
+
 private:
 	
 	void OnDestroy();

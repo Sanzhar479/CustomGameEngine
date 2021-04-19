@@ -27,7 +27,6 @@ struct Material
 	vec3 ambient;//ka
 	vec3 diffuse;//kd
 	vec3 specular;//ks
-    string name;
 };
 
 uniform Material material;
@@ -52,7 +51,7 @@ vec3 reflectDir= reflect(-lightDir,norm);
 float spec= pow(max(dot(viewDir,reflectDir),0.0),material.shininess);
 vec3 specular= (spec * material.specular)* light.lightColour;
 
-vec3 result= ambient + diffuse + specular;
+vec3 result = ambience + diffuse + specular;
 
 
 fColour = vec4(result, material.transparency);

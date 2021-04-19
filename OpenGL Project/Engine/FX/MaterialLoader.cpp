@@ -52,10 +52,9 @@ void MaterialLoader::LoadMaterial(std::string filePath_) {
 			ni >> x >> y >> z;
 			m.specular = glm::vec3(x, y, z);
 		}
-
-		if (m.diffuseMap != 0) { MaterialHandler::GetInstance()->AddMaterial(m); }
-		in.close();
 	}
+	if (m.diffuseMap != 0) { MaterialHandler::GetInstance()->AddMaterial(m); }
+	in.close();
 }
 
 GLuint MaterialLoader::Loadtexture(std::string fileName_){

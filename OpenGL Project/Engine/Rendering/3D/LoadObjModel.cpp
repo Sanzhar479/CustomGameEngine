@@ -46,6 +46,20 @@ void LoadObjModel::LoadModel(const std::string& filePath_) {
 			float x, y, z;
 			v >> x >> y >> z;
 			vertices.push_back(glm::vec3(x, y, z));
+			{
+				if (boundingBox.minVert.x > x)
+					boundingBox.minVert.x = x;
+				if (boundingBox.minVert.y > y)
+					boundingBox.minVert.y = y;
+				if (boundingBox.minVert.z > z)
+					boundingBox.minVert.z = z;
+				if (boundingBox.maxVert.x < x)
+					boundingBox.maxVert.x = x;
+				if (boundingBox.maxVert.y < y)
+					boundingBox.maxVert.y = y;
+				if (boundingBox.maxVert.z < z)
+					boundingBox.maxVert.z = z;
+			}
 		}
 		else if (line.substr(0, 2) == "vn") {
 			std::stringstream vn(line.substr(2));
@@ -120,4 +134,8 @@ void LoadObjModel::LoadMaterialLibrary(const std::string& matFilePath_) {
 			LoadMaterial(line.substr(7));
 		}
 	}*/
+}
+
+BoundingBox LoadObjModel::GetBoundingBox() const {
+	return boundingBox;
 }

@@ -13,7 +13,7 @@ bool GameScene::OnCreate() {
 	CEngine::GetInstance()->SetCamera(new Camera());
 	CEngine::GetInstance()->GetCamera()->SetPosition(glm::vec3(0.0f, 0.0f, 4.0f));
 	CEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(0.0f, 0.0f, 2.0f), 0.1f, 0.5f, 0.5f,
-		glm::vec3(0.6f, 0.4f, 0.0f)));
+		glm::vec3(1.0f, 1.0f, 1.0f)));
 
 	Model* diceModel = new Model("./Assets/Models/Dice.obj", "./Assets/Materials/Dice.mtl",
 	ShaderHandler::GetInstance()->GetShader("defaultShader"));
@@ -24,7 +24,7 @@ bool GameScene::OnCreate() {
 
 
 	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-2.0f, 0.0f, -2.0f)));
-	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(2.0f, 0.0f, 0.0f)), "Apple");
+	SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(2.0f, 0.0f, 0.0f)), "Apple");
 	/*TextureHandler::GetInstance()->CreateTexture("CheckerboardTexture", "./Assets/Textures/CheckerboardTexture.png");
 	*/
 	//Vertex v;

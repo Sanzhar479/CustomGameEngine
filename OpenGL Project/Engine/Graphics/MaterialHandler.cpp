@@ -31,6 +31,11 @@ void MaterialHandler::AddMaterial(Material mat_)
 
 const Material MaterialHandler::GetMaterial(const std::string& matName_)
 {
+	for (size_t i = 0; i < materials.size(); i++)
+	{
+		if (materials[i].name == matName_)
+			return materials[i];
+	}
 	return Material();
 }
 
