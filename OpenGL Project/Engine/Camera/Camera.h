@@ -22,6 +22,9 @@ class Camera
 	glm::mat4 GetOrthographic() const;
 	glm::vec3 GetPosition();
 
+	float GetNearPlane() const;
+	float GetFarPlane() const;
+
 	void ProcessMouseMovement(glm::vec2 offset_);
 	void ProcessMouseZoom(int y_);
 

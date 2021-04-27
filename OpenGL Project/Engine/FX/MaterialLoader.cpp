@@ -34,7 +34,7 @@ void MaterialLoader::LoadMaterial(std::string filePath_) {
 			ni >> i;
 			m.transparency = i;
 		}
-		else if (line.substr(0, 3) == "Ke ") {
+		else if (line.substr(0, 3) == "Ka ") {
 			std::stringstream ni(line.substr(3));
 			float x, y, z;
 			ni >> x >> y >> z;
@@ -46,7 +46,7 @@ void MaterialLoader::LoadMaterial(std::string filePath_) {
 			ni >> x >> y >> z;
 			m.diffuse = glm::vec3(x, y, z);
 		}
-		else if (line.substr(0, 3) == "Ks ") {
+		else if (line.substr(0, 4) == "\tKs ") {
 			std::stringstream ni(line.substr(3));
 			float x, y, z;
 			ni >> x >> y >> z;

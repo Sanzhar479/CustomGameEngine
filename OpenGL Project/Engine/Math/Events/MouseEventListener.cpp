@@ -1,5 +1,5 @@
 #include "MouseEventListener.h"
-#include "../Core/CEngine.h"
+#include "../../Core/CEngine.h"
 
 CEngine* MouseEventListener::engineInstance = nullptr;
 glm::ivec2 MouseEventListener::mouse = glm::ivec2();
@@ -41,7 +41,7 @@ void MouseEventListener::NotifyOfMousePressed(int buttonType_) {
 
 void MouseEventListener::NotifyOfMouseReleased(int buttonType_) {
 	if (engineInstance) {
-		engineInstance->NotifyOfMousePressed(mouse, buttonType_);
+		engineInstance->NotifyOfMouseReleased(mouse, buttonType_);
 	}
 }
 

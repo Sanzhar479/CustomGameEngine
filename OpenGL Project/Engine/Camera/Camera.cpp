@@ -113,6 +113,14 @@ void Camera::ProcessMouseMovement(glm::vec2 offset_) {
     }
     UpdateCameraVector();
 }
+
+
+float Camera::GetNearPlane() const {
+    return nearPlane;
+}
+float Camera::GetFarPlane() const {
+    return farPlane;
+}
 void Camera::ProcessMouseZoom(int y_) {
     if (y_ < 0 || y_ > 0) {
         position += static_cast<float>(y_) * (forward * 2.0f);

@@ -138,6 +138,7 @@ void CEngine::OnDestroy()
 	TextureHandler::GetInstance()->OnDestroy();
 	MaterialHandler::GetInstance()->OnDestroy();
 	SceneGraph::GetInstance()->OnDestroy();
+	CollisionHandler::GetInstance()->OnDestroy();
 
 	delete gameInterface;
 	gameInterface = nullptr;
@@ -157,7 +158,7 @@ void CEngine::NotifyOfMousePressed(glm::ivec2 mouse_, int buttonType_) {
 
 }
 void CEngine::NotifyOfMouseReleased(glm::ivec2 mouse_, int buttonType_) {
-
+	CollisionHandler::GetInstance()->MouseUpdate(mouse_, buttonType_);
 }
 void CEngine::NotifyOfMouseMove(glm::ivec2 mouse_) {
 	if (camera) {
