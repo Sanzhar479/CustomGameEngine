@@ -33,8 +33,8 @@ void Mesh::Render(Camera* camera_, std::vector<glm::mat4> instances_)
 	glUniform3fv(lightPos,1,glm::value_ptr(camera_->GetLightList()[0]->GetPosition()));
 	glUniform3fv(lightColour, 1, glm::value_ptr(camera_->GetLightList()[0]->GetColour()));
 	glUniform1f(lightAmb, (camera_->GetLightList()[0]->GetAmbience()));
-	glUniform1f(lightDiff,(camera_->GetLightList()[0]->GetDiff()));
-	glUniform1f(lightSpec,(camera_->GetLightList()[0]->GetSpec()));
+	//glUniform1f(lightDiff,(camera_->GetLightList()[0]->GetDiff()));
+	//glUniform1f(lightSpec,(camera_->GetLightList()[0]->GetSpec()));
 
 	glUniform1f(shininess,(subMesh.material.shininess));
 	glUniform1f(transparency, (subMesh.material.transparency));

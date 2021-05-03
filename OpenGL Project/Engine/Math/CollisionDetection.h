@@ -17,6 +17,7 @@ public:
 	static Ray MousePosToWorldRay(glm::vec2 mouseCoords_, float screenWidth_,
 		float screenHeight_, Camera* camera_);
 	static bool RayObbIntersection(Ray* ray_, BoundingBox* box);
+
 };
 
 #endif 

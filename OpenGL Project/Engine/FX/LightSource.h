@@ -1,6 +1,5 @@
 #ifndef LIGHTSOURCE_H
 #define LIGHTSOURCE_H
-#
 #include <glm/gtc/matrix_transform.hpp>
 class LightSource
 

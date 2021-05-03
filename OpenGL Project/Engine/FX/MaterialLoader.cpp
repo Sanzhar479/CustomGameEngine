@@ -22,13 +22,13 @@ void MaterialLoader::LoadMaterial(std::string filePath_) {
 			m.diffuseMap = Loadtexture(matName);
 			m.name = matName;
 		}
-		else if (line.substr(0, 3) == "Ni ") {
+		else if (line.substr(0, 3) == "\tNs ") {
 			std::stringstream ni(line.substr(3));
 			float i;
 			ni >> i;
 			m.shininess = i;
 		}
-		else if (line.substr(0, 2) == "d ") {
+		else if (line.substr(0, 2) == "\td ") {
 			std::stringstream ni(line.substr(2));
 			float i;
 			ni >> i;
